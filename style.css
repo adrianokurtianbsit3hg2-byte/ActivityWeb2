@@ -1,0 +1,94 @@
+/* === style.css === */
+
+/* Global layout */
+body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Sidebar - FIXED IN PLACE */
+.sidebar {
+    width: 220px;
+    background-color: #0d6efd;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;  /* 👈 FIXED */
+    left: 0;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto; /* Allow scrolling if sidebar content is long */
+    z-index: 999;
+}
+
+.sidebar a {
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background-color: #0b5ed7;
+}
+
+/* TOP HEADER - FIXED */
+.top-header {
+    background-color: #0d6efd;
+    color: white;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    left: 220px;  /* 👈 Changed from 168px to match sidebar width */
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.top-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* Main content */
+.content {
+    width: calc(100% - 220px); /* 👈 Changed from 110% */
+    margin-left: 220px;  /* 👈 Changed from 20px to match sidebar width */
+    margin-top: 80px;    /* 👈 Changed from 60px to add more space */
+    padding: 20px;
+}
+
+/* Responsive - sidebar turns into top nav */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0;
+        position: relative; /* 👈 Remove fixed position on mobile */
+        height: auto;
+    }
+    .sidebar a {
+        padding: 10px;
+        text-align: center;
+    }
+    .top-header {
+        left: 0;
+    }
+    .content {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 60px;
+    }
+}
