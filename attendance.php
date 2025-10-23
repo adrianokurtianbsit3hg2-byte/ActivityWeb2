@@ -239,7 +239,7 @@ $eventsJson = json_encode($events, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICO
             <div class="row mb-3">
                   <div class="col-md-6">
                       <label class="form-label">Attendance Date</label>
-                      <input type="text" class="form-control" id="att_date" readonly>
+                      <input type="text" class="form-control" id="att_date" name="attendance_date" readonly>
                   </div>
                   <div class="col-md-6">
                       <label class="form-label">Learning Modality</label>
@@ -430,11 +430,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('att_modality').value = props.learning_modality || '';
   document.getElementById('att_link').value = props.meeting_link || '';
   document.getElementById('att_link_btn').href = props.meeting_link || '#';
+  document.getElementById('att_date').value = document.getElementById('evt_days').value;
 
-  const clickedDate = ev.start ? new Date(ev.start) : null;
-  document.getElementById('att_date').value = clickedDate
-    ? clickedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-    : '';
 
   new bootstrap.Modal(document.getElementById('facultyAttendanceModal')).show();
 });
