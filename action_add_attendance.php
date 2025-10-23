@@ -38,12 +38,16 @@ if ($existing) {
 }
 
 // STEP 2: Generate new key like scheduleid-1, scheduleid-2, etc.
-$newKey = $sched_id . '-' . ($count + 1);
+$attendance_date = $_POST['attendance_date'] ?? '';
+$formattedDate = date('Ymd', strtotime($attendance_date));
+$newKey = $sched_id . '-' . $formattedDate;
+
 
 // STEP 3: Save attendance record
 $db->update("attendance", $newKey, [
     "sched_id"          => $sched_id,
     "attendance_status" => $attendance_status,
+    "attendance_date"   => $attendance_date,
     "dress_code"        => $dress_code,
     "remarks"           => $remarks
 ]);
